@@ -1,0 +1,23 @@
+{
+  "name": "fitness_leveling",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Amend37/Fitness_Leveling.git"
+  },
+  "author": "Anthony Mendoza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Amend37/Fitness_Leveling/issues"
+  },
+  "homepage": "https://github.com/Amend37/Fitness_Leveling#readme",
+  "description": "",
+  "workspaces": [
+    "packages/*"
+  ]
+}
