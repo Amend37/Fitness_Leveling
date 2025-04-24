@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Fitness Level Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles/tokens.css" />
   <link rel="stylesheet" href="/styles/page.css" />
 </head>
@@ -12,14 +15,26 @@
   <p>XP: 1250</p>
   <h2>My Workout Plans</h2>
   <ul>
-    <li><a href="workout-plan-strength.html">Strength Plan</a></li>
-    <li><a href="workout-plan-cardio.html">Cardio Plan</a></li>
-    <li><a href="workout-plan-custom.html">Custom Plan</a></li>
+    <li>
+      <svg class="icon"><use href="/icons/workouts.svg#icon-dumbbell" /></svg>
+      <a href="workout-plan-strength.html">Strength Plan</a>
+    </li>
+    <li>
+      <svg class="icon"><use href="/icons/workouts.svg#icon-heart" /></svg>
+      <a href="workout-plan-cardio.html">Cardio Plan</a>
+    </li>
+    <li>
+      <svg class="icon"><use href="/icons/workouts.svg#icon-yoga" /></svg>
+      <a href="workout-plan-custom.html">Custom Plan</a>
+    </li>
   </ul>
 
   <h2>My Achievements</h2>
   <ul>
-    <li><a href="achievement-first-workout.html">First Workout Badge</a></li>
+    <li>
+      <svg class="icon"><use href="/icons/workouts.svg#icon-stars" /></svg>
+      <a href="achievement-first-workout.html">First Workout Badge</a>
+    </li>
   </ul>
 </body>
 </html>

@@ -1,14 +1,20 @@
 :root {
-    --color-background-page: #121212;
-    --color-background-header: #1f1f1f;
-    --color-text: #f1f1f1;
-    --color-text-header: #ffffff;
-    --color-accent: #ff6b6b;
-    --color-accent-alt: #4ecdc4;
-    --color-link: #ffa502;
-    --color-muted: #2c2c2c;
-  
-    --font-family-base: 'Segoe UI', sans-serif;
-    --spacing-padding: 1rem;
-  }
-  
+  /* Color Tokens */
+  --color-background-page: #0a0707;
+  --color-background-header: #1f1f1f;
+  --color-text: #f1f1f1;
+  --color-text-header: #ffffff;
+  --color-accent: #ff6b6b;
+  --color-accent-alt: #4ecdc4;
+  --color-link: #ffa502;
+  --color-muted: #2c2c2c;
+
+  /* Typography Tokens */
+  --font-family-body: 'Inter', Arial, sans-serif;
+  --font-family-heading: 'Bebas Neue', Impact, sans-serif;
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+
+  /* Spacing Tokens */
+  --spacing-padding: 1rem;
+}
