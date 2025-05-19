@@ -14,6 +14,10 @@
 
   <header class="top-header">
     <h1>Fitness Level Tracker</h1>
+    <label id="themeToggle">
+      <input type="checkbox" autocomplete="off" />
+      light Mode
+    </label>
     <nav>
       <a href="index.html">Home</a>
       <a href="workout-plan-strength.html">Strength</a>
@@ -44,6 +48,33 @@
     </section>
   </div>
   </main>
-
+  <script>
+    const label = document.getElementById("themeToggle");
+    const body = document.body;
+    const checkbox = label.querySelector('input[type="checkbox"]');
+  
+    const saved = localStorage.getItem("lightmode");
+    if (saved === "true") {
+      checkbox.checked = true;
+      body.classList.add("light-mode");
+    }
+  
+    label.onchange = (e) => {
+      e.stopPropagation();
+      const checked = e.target.checked;
+      localStorage.setItem("lightmode", checked);
+      label.dispatchEvent(
+        new CustomEvent("lightmode:toggle", {
+          bubbles: true,
+          detail: { checked }
+        })
+      );
+    };
+  
+    body.addEventListener("lightmode:toggle", (e) => {
+      const { checked } = e.detail;
+      body.classList.toggle("light-mode", checked);
+    });
+  </script>
 </body>
 </html>
