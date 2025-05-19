@@ -11,16 +11,26 @@
   <link rel="stylesheet" href="/styles/page.css" />
 </head>
 <body>
-  <h1>Burpees</h1>
-  <p>Target: Full Body, Cardio</p>
-  <p>Steps:</p>
-  <ol>
-    <li>Start standing, then drop into a squat with hands on the ground.</li>
-    <li>Kick your feet back into a push-up position.</li>
-    <li>Return to squat and jump up with arms raised.</li>
-  </ol>
+  <fit-tutorial 
+  title="Burpees"
+  target="Full Body, Cardio"
+>
+  <li>Start standing, then drop into a squat with hands on the ground.</li>
+  <li>Kick your feet back into a push-up position.</li>
+  <li>Return to squat and jump up with arms raised.</li>
+</fit-tutorial>
+
   <p><a href="workout-plan-cardio.html">← Back to Cardio Plan</a></p>
   <script src="theme-toggle.js"></script>
+  <script type="module">
+    import { define } from "@calpoly/mustang";
+    import { FitTutorialElement } from "/src/fit-tutorial.js";
+  
+    define({
+      "fit-tutorial": FitTutorialElement
+    });
+  </script>
+  
 
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Squat Tutorial</title>
+  <title>Push-Up Tutorial</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -11,17 +11,26 @@
   <link rel="stylesheet" href="/styles/page.css" />
 </head>
 <body>
-  <h1>Squat</h1>
-  <p>Target Muscles: quadriceps, glutes, and hamstrings</p>
-  <p>Steps:</p>
-  <ol>
-    <li>Stand with feet shoulder-width apart.</li>
-    <li>Lower your hips back and down like you're sitting.</li>
-    <li>Keep knees behind toes, chest lifted.</li>
-    <li>Return to standing position and repeat.</li>
-  </ol>
+  <fit-tutorial 
+  title="Push-Up"
+  target="Chest, Triceps"
+>
+  <li>Get into plank position.</li>
+  <li>Lower your body.</li>
+  <li>Push back up.</li>
+</fit-tutorial>
+
   <p><a href="workout-plan-strength.html">← Back to Strength Plan</a></p>
   <script src="theme-toggle.js"></script>
+  <script type="module">
+    import { define } from "@calpoly/mustang";
+    import { FitTutorialElement } from "/src/fit-tutorial.js";
+  
+    define({
+      "fit-tutorial": FitTutorialElement
+    });
+  </script>
+  
 
 </body>
 </html>

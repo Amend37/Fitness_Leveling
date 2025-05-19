@@ -12,16 +12,26 @@
   <link rel="stylesheet" href="/styles/page.css" />
 </head>
 <body>
-  <h1>High Knees</h1>
-  <p>Target: Legs, Cardio</p>
-  <p>Steps:</p>
-  <ol>
-    <li>Run in place while lifting your knees as high as possible.</li>
-    <li>Pump your arms to increase intensity.</li>
-    <li>Maintain pace for a set duration.</li>
-  </ol>
+  <fit-tutorial 
+  title="High Knees"
+  target="Legs, Cardio"
+>
+  <li>Run in place while lifting your knees as high as possible.</li>
+  <li>Pump your arms to increase intensity.</li>
+  <li>Maintain pace for a set duration.</li>
+</fit-tutorial>
+
   <p><a href="workout-plan-cardio.html">← Back to Cardio Plan</a></p>
   <script src="theme-toggle.js"></script>
+  <script type="module">
+    import { define } from "@calpoly/mustang";
+    import { FitTutorialElement } from "/src/fit-tutorial.js";
+  
+    define({
+      "fit-tutorial": FitTutorialElement
+    });
+  </script>
+  
 
 </body>
 </html>
