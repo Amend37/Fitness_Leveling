@@ -9,6 +9,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
+        allTutorials: resolve(__dirname, 'all-tutorials.html'),
         burpees: resolve(__dirname, 'tutorial-burpees.html'),
         highKnees: resolve(__dirname, 'tutorial-high-knees.html'),
         jumpingJacks: resolve(__dirname, 'tutorial-jumping-jacks.html'),

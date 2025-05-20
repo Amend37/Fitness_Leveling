@@ -1,0 +1,48 @@
+[
+  {
+    "title": "Burpees",
+    "target": "Full Body, Cardio",
+    "steps": [
+      "Start standing, then drop into a squat with hands on the ground.",
+      "Kick your feet back into a push-up position.",
+      "Return to squat and jump up with arms raised."
+    ]
+  },
+  {
+    "title": "High Knees",
+    "target": "Legs, Cardio",
+    "steps": [
+      "Run in place while lifting your knees as high as possible.",
+      "Pump your arms to increase intensity.",
+      "Maintain pace for a set duration."
+    ]
+  },
+  {
+    "title": "Jumping Jacks",
+    "target": "Full Body",
+    "steps": [
+      "Start with your feet together and hands at your sides.",
+      "Jump while spreading your legs and raising your arms.",
+      "Return to the starting position and repeat."
+    ]
+  },
+  {
+    "title": "Push-Up",
+    "target": "Chest, Triceps",
+    "steps": [
+      "Get into plank position.",
+      "Lower your body.",
+      "Push back up."
+    ]
+  },
+  {
+    "title": "Squat",
+    "target": "Quadriceps, Glutes, Hamstrings",
+    "steps": [
+      "Stand with feet shoulder-width apart.",
+      "Lower your hips back and down like you're sitting.",
+      "Keep knees behind toes, chest lifted.",
+      "Return to standing position and repeat."
+    ]
+  }
+]

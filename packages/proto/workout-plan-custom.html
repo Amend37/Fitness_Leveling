@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="/styles/page.css" />
 </head>
 <body>
+  <div id="header-container"></div>
+  
   <h1>Create Your Custom Workout Plan</h1>
   <p>Select the exercises you want to do for each day of the week.</p>
 
@@ -77,6 +79,62 @@
 
   <p><a href="index.html">← Back to Profile</a></p>
   <script src="theme-toggle.js"></script>
+  <script>
+  fetch("/components/header.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("header-container").innerHTML = html;
+
+      const label = document.getElementById("themeToggle");
+      const checkbox = label.querySelector('input[type="checkbox"]');
+      const body = document.body;
+      const saved = localStorage.getItem("lightmode");
+
+      if (saved === "true") {
+        checkbox.checked = true;
+        body.classList.add("light-mode");
+      }
+
+      label.onchange = (e) => {
+        e.stopPropagation();
+        const checked = e.target.checked;
+        localStorage.setItem("lightmode", checked);
+        label.dispatchEvent(
+          new CustomEvent("lightmode:toggle", {
+            bubbles: true,
+            detail: { checked }
+          })
+        );
+      };
+
+      body.addEventListener("lightmode:toggle", (e) => {
+        const { checked } = e.detail;
+        body.classList.toggle("light-mode", checked);
+      });
+
+      const pageMap = {
+        "all-tutorials.html": "tutorials",
+        "workout-plan-strength.html": "strength",
+        "workout-plan-cardio.html": "cardio",
+        "workout-plan-custom.html": "custom"
+      };
+
+      const filename = location.pathname.split("/").pop();
+      const current = pageMap[filename];
+
+      const nav = document.getElementById("main-nav");
+      const activeLink = nav?.querySelector(`[data-page="${current}"]`);
+
+      if (activeLink) {
+        const homeLink = document.createElement("a");
+        homeLink.href = "index.html";
+        homeLink.textContent = "Home";
+        homeLink.setAttribute("data-page", "home");
+        nav.replaceChild(homeLink, activeLink);
+      }
+    });
+</script>
+
 
 </body>
 </html>
