@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Strength Workout Plan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/reset.css" />
+  <link rel="stylesheet" href="/styles/tokens.css" />
+  <link rel="stylesheet" href="/styles/page.css" />
+</head>
+<body>
+  <div id="header-container"></div>
+  
+  <h1>Strength Workout Plan</h1>
+  <p>Goal: Build strength and muscle mass</p>
+  <p>Level Required: 3</p>
+
+  <h2>Weekly Schedule</h2>
+  <table border="1" cellpadding="8" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Day</th>
+        <th>Workout</th>
+        <th>Links</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Monday</td>
+        <td>Push-Ups + Squats</td>
+        <td>
+          <a href="tutorial-pushup.html">Push-Ups</a> |
+          <a href="tutorial-squat.html">Squats</a>
+        </td>
+      </tr>
+      <tr>
+        <td>Tuesday</td>
+        <td>Squats</td>
+        <td>
+          <a href="tutorial-squat.html">Squats</a>
+        </td>
+      </tr>
+      <tr>
+        <td>Wednesday</td>
+        <td>Rest Day </td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <td>Thursday</td>
+        <td>Push-Ups (Endurance Set)</td>
+        <td>
+          <a href="tutorial-pushup.html">Push-Ups</a>
+        </td>
+      </tr>
+      <tr>
+        <td>Friday</td>
+        <td>Push-Ups + Squats Combo</td>
+        <td>
+          <a href="tutorial-pushup.html">Push-Ups</a> |
+          <a href="tutorial-squat.html">Squats</a>
+        </td>
+      </tr>
+      <tr>
+        <td>Saturday</td>
+        <td>Optional Free Strength Day</td>
+        <td>
+          Choose any: <a href="tutorial-pushup.html">Push-Ups</a>, 
+          <a href="tutorial-squat.html">Squats</a>
+        </td>
+      </tr>
+      <tr>
+        <td>Sunday</td>
+        <td>Stretch & Recovery</td>
+        <td>-</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><a href="index.html">← Back to Profile</a></p>
+  <script src="theme-toggle.js"></script>
+  <script>
+  fetch("/components/header.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("header-container").innerHTML = html;
+
+      const label = document.getElementById("themeToggle");
+      const checkbox = label.querySelector('input[type="checkbox"]');
+      const body = document.body;
+      const saved = localStorage.getItem("lightmode");
+
+      if (saved === "true") {
+        checkbox.checked = true;
+        body.classList.add("light-mode");
+      }
+
+      label.onchange = (e) => {
+        e.stopPropagation();
+        const checked = e.target.checked;
+        localStorage.setItem("lightmode", checked);
+        label.dispatchEvent(
+          new CustomEvent("lightmode:toggle", {
+            bubbles: true,
+            detail: { checked }
+          })
+        );
+      };
+
+      body.addEventListener("lightmode:toggle", (e) => {
+        const { checked } = e.detail;
+        body.classList.toggle("light-mode", checked);
+      });
+
+      const pageMap = {
+        "all-tutorials.html": "tutorials",
+        "workout-plan-strength.html": "strength",
+        "workout-plan-cardio.html": "cardio",
+        "workout-plan-custom.html": "custom"
+      };
+
+      const filename = location.pathname.split("/").pop();
+      const current = pageMap[filename];
+
+      const nav = document.getElementById("main-nav");
+      const activeLink = nav?.querySelector(`[data-page="${current}"]`);
+
+      if (activeLink) {
+        const homeLink = document.createElement("a");
+        homeLink.href = "index.html";
+        homeLink.textContent = "Home";
+        homeLink.setAttribute("data-page", "home");
+        nav.replaceChild(homeLink, activeLink);
+      }
+    });
+</script>
+
+
+</body>
+</html>
