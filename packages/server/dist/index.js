@@ -22,21 +22,30 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 var import_express = __toESM(require("express"));
+var import_path = __toESM(require("path"));
 var import_mongo = require("./services/mongo");
 var import_tutorial_svc = __toESM(require("./services/tutorial-svc"));
 var import_tutorials = __toESM(require("./routes/tutorials"));
+var import_auth = __toESM(require("./routes/auth"));
 (0, import_mongo.connect)("fitness");
 const app = (0, import_express.default)();
 const port = process.env.PORT || 3e3;
-const staticDir = process.env.STATIC || "../proto/dist";
-app.use(import_express.default.static(staticDir));
+const staticDir = import_path.default.resolve(__dirname, "../../proto/dist");
 app.use(import_express.default.json());
-app.use("/api/tutorials", import_tutorials.default);
-app.get("/hello", (req, res) => {
-  res.send("Hello, World");
-});
+app.use("/auth", import_auth.default);
+app.use("/api/tutorials", import_auth.authenticateUser, import_tutorials.default);
 app.get("/", (req, res) => {
-  res.sendFile("index.html", { root: staticDir });
+  res.redirect("/login.html");
+});
+app.get("/login.html", (req, res) => {
+  res.sendFile("login.html", { root: staticDir });
+});
+app.get("/newuser.html", (req, res) => {
+  res.sendFile("newuser.html", { root: staticDir });
+});
+app.get("/:file.html", import_auth.authenticateUser, (req, res) => {
+  const file = req.path.substring(1);
+  res.sendFile(file, { root: staticDir });
 });
 app.get("/tutorials", (req, res) => {
   import_tutorial_svc.default.index().then((data) => {

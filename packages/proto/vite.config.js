@@ -9,6 +9,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         index: resolve(__dirname, "index.html"),
+        login: resolve(__dirname, "login.html"),
+        newuser: resolve(__dirname, "newuser.html"),
         allTutorials: resolve(__dirname, "all-tutorials.html"),
         strength: resolve(__dirname, "workout-plan-strength.html"),
         cardio: resolve(__dirname, "workout-plan-cardio.html"),
@@ -20,6 +22,12 @@ export default defineConfig({
         highKnees: resolve(__dirname, "tutorial-high-knees.html"),
         achievement: resolve(__dirname, "achievement-first-workout.html")
       }
+    }
+  },
+  server: {
+    proxy: {
+      "/auth": "http://localhost:3000",
+      "/api": "http://localhost:3000"
     }
   }
 });

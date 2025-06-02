@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Create Account</title>
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/styles/auth.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <script type="module">
+    import { define, Auth } from "@calpoly/mustang";
+    import { LoginFormElement } from "/src/auth/login-form";
+
+    define({
+      "mu-auth": Auth.Provider,
+      "login-form": LoginFormElement
+    });
+  </script>
+</head>
+<body>
+  <mu-auth>
+    <div class="card">
+      <img class="logo" src="/favicon.ico" alt="App Logo" />
+      
+      <h2>Create Account</h2>
+
+      <login-form api="/auth/login" redirect="/index.html">
+  <form>
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input id="username" name="username" autocomplete="off" />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input id="password" type="password" name="password" />
+    </div>
+
+    <span slot="button">
+      <button type="submit">Login</button>
+    </span>
+  </form>
+</login-form>
+
+
+      <p>Already have an account? <a href="login.html">Log in</a></p>
+    </div>
+  </mu-auth>
+</body>
+</html>

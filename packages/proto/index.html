@@ -11,21 +11,8 @@
   <link rel="stylesheet" href="/styles/page.css" />
 </head>
 <body>
-
-  <header class="top-header">
-    <h1>Fitness Level Tracker</h1>
-    <label id="themeToggle">
-      <input type="checkbox" autocomplete="off" />
-      light Mode
-    </label>
-    <nav>
-      <a href="all-tutorials.html">Tutorials</a>
-      <a href="workout-plan-strength.html">Strength</a>
-      <a href="workout-plan-cardio.html">Cardio</a>
-      <a href="workout-plan-custom.html">Custom</a>
-    </nav>
-  </header>
-
+ <mu-auth provides="fit:auth">
+    <fit-header></fit-header>
   <main class="wrapper">
     <div class="dashboard-layout">
       <aside class="profile-box">
@@ -48,6 +35,7 @@
     </section>
   </div>
   </main>
+  </mu-auth>
   <script>
     const label = document.getElementById("themeToggle");
     const body = document.body;
@@ -76,5 +64,15 @@
       body.classList.toggle("light-mode", checked);
     });
   </script>
+  <script type="module">
+  import { define, Auth } from "@calpoly/mustang";
+  import { FitHeader } from "/src/fit-header";
+
+  define({
+    "mu-auth": Auth.Provider,
+    "fit-header": FitHeader
+  });
+</script>
+
 </body>
 </html>

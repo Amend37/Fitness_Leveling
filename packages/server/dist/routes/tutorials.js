@@ -34,26 +34,24 @@ module.exports = __toCommonJS(tutorials_exports);
 var import_express = __toESM(require("express"));
 var import_tutorial_svc = __toESM(require("../services/tutorial-svc"));
 const router = import_express.default.Router();
-router.get("/", (_, res) => {
+router.get("/", (_req, res) => {
   import_tutorial_svc.default.index().then((list) => res.json(list)).catch((err) => res.status(500).send(err));
 });
-router.get("/:title", (req, res) => {
-  const { title } = req.params;
-  import_tutorial_svc.default.get(title).then((tutorial) => res.json(tutorial)).catch((err) => res.status(404).send(err));
+router.get("/:id", (req, res) => {
+  const { id } = req.params;
+  import_tutorial_svc.default.get(id).then((tut) => res.json(tut)).catch((err) => res.status(404).send(err));
 });
 router.post("/", (req, res) => {
   const newTutorial = req.body;
-  import_tutorial_svc.default.create(newTutorial).then(
-    (tutorial) => res.status(201).json(tutorial)
-  ).catch((err) => res.status(500).send(err));
+  import_tutorial_svc.default.create(newTutorial).then((tut) => res.status(201).json(tut)).catch((err) => res.status(500).send(err));
 });
-router.put("/:title", (req, res) => {
-  const { title } = req.params;
+router.put("/:id", (req, res) => {
+  const { id } = req.params;
   const newTutorial = req.body;
-  import_tutorial_svc.default.update(title, newTutorial).then((tutorial) => res.json(tutorial)).catch((err) => res.status(404).end());
+  import_tutorial_svc.default.update(id, newTutorial).then((tut) => res.json(tut)).catch((err) => res.status(404).send(err));
 });
-router.delete("/:title", (req, res) => {
-  const { title } = req.params;
-  import_tutorial_svc.default.remove(title).then(() => res.status(204).end()).catch((err) => res.status(404).send(err));
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+  import_tutorial_svc.default.remove(id).then(() => res.status(204).end()).catch((err) => res.status(404).send(err));
 });
 var tutorials_default = router;

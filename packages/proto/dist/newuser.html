@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Register</title>
+
+  <script type="module" crossorigin src="/assets/newuser-D0fcBpEH.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/property-B9hbC3tx.js">
+  <link rel="modulepreload" crossorigin href="/assets/state-C5UoNPOO.js">
+  <link rel="modulepreload" crossorigin href="/assets/login-form-C23MQncg.js">
+</head>
+<body class="page">
+  <mu-auth>
+    <h2>Create New Account</h2>
+    <main class="card">
+      <login-form api="/auth/register" redirect="/index.html">
+        <label>
+          <span>Username:</span>
+          <input name="username" autocomplete="off" />
+        </label>
+        <label>
+          <span>Password:</span>
+          <input type="password" name="password" />
+        </label>
+        <span slot="button">
+          <button type="submit">Register</button>
+        </span>
+      </login-form>
+    </main>
+    <p>Already have an account? <a href="login.html">Sign in here</a>.</p>
+  </mu-auth>
+</body>
+</html>
