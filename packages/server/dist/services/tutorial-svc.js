@@ -34,7 +34,31 @@ const TutorialModel = (0, import_mongoose.model)("Tutorial", TutorialSchema);
 function index() {
   return TutorialModel.find();
 }
-function get(title) {
-  return TutorialModel.findOne({ title });
+function get(id) {
+  return TutorialModel.findById(new import_mongoose.Types.ObjectId(id)).then((tut) => {
+    if (!tut) throw `${id} not found`;
+    return tut;
+  });
 }
-var tutorial_svc_default = { index, get };
+function create(json) {
+  const t = new TutorialModel(json);
+  return t.save();
+}
+function update(id, tutorial) {
+  return TutorialModel.findByIdAndUpdate(
+    new import_mongoose.Types.ObjectId(id),
+    tutorial,
+    { new: true }
+  ).then((updated) => {
+    if (!updated) throw `${id} not updated`;
+    return updated;
+  });
+}
+function remove(id) {
+  return TutorialModel.findByIdAndDelete(new import_mongoose.Types.ObjectId(id)).then(
+    (deleted) => {
+      if (!deleted) throw `${id} not deleted`;
+    }
+  );
+}
+var tutorial_svc_default = { index, get, create, update, remove };

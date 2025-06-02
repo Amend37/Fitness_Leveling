@@ -1,14 +1,15 @@
 import express, { Request, Response } from "express";
 import { connect } from "./services/mongo";
 import Tutorials from "./services/tutorial-svc";
-
+import tutorials from "./routes/tutorials";
 connect("fitness");
 
 const app = express();
 const port = process.env.PORT || 3000;
 const staticDir = process.env.STATIC || "../proto/dist";
 app.use(express.static(staticDir));
-
+app.use(express.json());
+app.use("/api/tutorials", tutorials);
 
 app.get("/hello", (req: Request, res: Response) => {
   res.send("Hello, World");

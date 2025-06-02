@@ -1,0 +1,38 @@
+### Get all tutorials
+GET http://localhost:3000/api/tutorials
+
+### Get one tutorial
+GET http://localhost:3000/api/tutorials/682ced6a62d62978c746feff
+
+
+### Create a new tutorial
+POST http://localhost:3000/api/tutorials
+Content-Type: application/json
+
+{
+  "title": "Plank",
+  "target": "Core",
+  "steps": [
+    "Get into a push-up position but rest on your forearms.",
+    "Keep your body in a straight line from head to heels.",
+    "Hold the position for 30 seconds to 1 minute."
+  ]
+}
+
+
+### Update an existing tutorial
+PUT http://localhost:3000/api/tutorials/683dcb56bf2cbdab75e484cb
+Content-Type: application/json
+
+{
+  "title": "Plank Hold",
+  "target": "Core",
+  "steps": [
+    "Elbows under shoulders, legs extended.",
+    "Tighten core, don't arch back.",
+    "Hold as long as possible with good form."
+  ]
+}
+
+### Delete a tutorial by ID
+DELETE http://localhost:3000/api/tutorials/683dcd1b9e925c04256d2fb3

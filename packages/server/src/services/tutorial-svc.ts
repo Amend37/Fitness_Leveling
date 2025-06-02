@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Types } from "mongoose";
 import { Tutorial } from "../models/tutorial";
 
 const TutorialSchema = new Schema<Tutorial>(
@@ -12,14 +12,39 @@ const TutorialSchema = new Schema<Tutorial>(
 
 const TutorialModel = model<Tutorial>("Tutorial", TutorialSchema);
 
-// Get all tutorials
 function index(): Promise<Tutorial[]> {
   return TutorialModel.find();
 }
 
-// Get one tutorial by title (optional enhancement)
-function get(title: string): Promise<Tutorial | null> {
-  return TutorialModel.findOne({ title });
+function get(id: string): Promise<Tutorial> {
+  return TutorialModel.findById(new Types.ObjectId(id)).then((tut) => {
+    if (!tut) throw `${id} not found`;
+    return tut;
+  });
 }
 
-export default { index, get };
+function create(json: Tutorial): Promise<Tutorial> {
+  const t = new TutorialModel(json);
+  return t.save();
+}
+
+function update(id: string, tutorial: Tutorial): Promise<Tutorial> {
+  return TutorialModel.findByIdAndUpdate(
+    new Types.ObjectId(id),
+    tutorial,
+    { new: true }
+  ).then((updated) => {
+    if (!updated) throw `${id} not updated`;
+    return updated as Tutorial;
+  });
+}
+
+function remove(id: string): Promise<void> {
+  return TutorialModel.findByIdAndDelete(new Types.ObjectId(id)).then(
+    (deleted) => {
+      if (!deleted) throw `${id} not deleted`;
+    }
+  );
+}
+
+export default { index, get, create, update, remove };
