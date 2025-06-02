@@ -186,7 +186,7 @@ Expecting `+ft.join(", ")+", got '"+(this.terminals_[b]||b)+"'":Ut="Parse error 
         <p>Target: ${this.target}</p>
         <p>Steps:</p>
         <ol>
-          <slot></slot>
+          <slot name="step"></slot>
         </ol>
       </section>
     `}};Xt.styles=Ti`

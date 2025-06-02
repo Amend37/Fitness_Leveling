@@ -12,40 +12,33 @@ export class TutorialListElement extends LitElement {
   @property() src?: string;
 
   @state()
-  tutorials: Tutorial[] = [];
+tutorials: Array<Tutorial> = [];
 
-  override connectedCallback() {
-    super.connectedCallback();
-    if (this.src) this.hydrate(this.src);
-  }
-
-  async hydrate(url: string) {
-    try {
-      const res = await fetch(url);
-      if (!res.ok) throw new Error("Failed to fetch JSON");
-      const data = await res.json();
-      this.tutorials = data;
-    } catch (err) {
-      console.error("Error loading tutorials:", err);
-    }
-  }
+async connectedCallback() {
+  super.connectedCallback();
+  const res = await fetch("/tutorials");
+  this.tutorials = await res.json();
+}
 
   override render() {
-    return html`
-      <section>
-        ${this.tutorials.map(
-          (tut) => html`
-            <fit-tutorial 
-              title=${tut.title} 
-              target=${tut.target}
-            >
-              ${tut.steps.map((step) => html`<li>${step}</li>`)}
-            </fit-tutorial>
-          `
-        )}
-      </section>
-    `;
-  }
+  return html`
+    <section>
+      ${this.tutorials.map(
+        (tut) => html`
+          <fit-tutorial 
+            title=${tut.title} 
+            target=${tut.target}
+          >
+            ${tut.steps.map(
+              (step) => html`<li slot="step">${step}</li>`
+            )}
+          </fit-tutorial>
+        `
+      )}
+    </section>
+  `;
+}
+
 
   static styles = css`
     section {

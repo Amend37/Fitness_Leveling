@@ -12,7 +12,7 @@ export class FitTutorialElement extends LitElement {
         <p>Target: ${this.target}</p>
         <p>Steps:</p>
         <ol>
-          <slot></slot>
+          <slot name="step"></slot>
         </ol>
       </section>
     `;

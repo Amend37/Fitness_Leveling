@@ -9,8 +9,8 @@
   <link rel="stylesheet" href="/styles/reset.css" />
   <link rel="stylesheet" href="/styles/tokens.css" />
   <link rel="stylesheet" href="/styles/page.css" />
-  <script type="module" crossorigin src="/assets/allTutorials-CE7ZF_Pw.js"></script>
-  <link rel="modulepreload" crossorigin href="/assets/fit-tutorial-DbXCLEAY.js">
+  <script type="module" crossorigin src="/assets/allTutorials-CNgFPXCC.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/fit-tutorial-BpDYqwe8.js">
 </head>
 <body>
 
@@ -18,7 +18,7 @@
 
   <main class="wrapper">
     <h1>All Tutorials</h1>
-    <tutorial-list src="/data/tutorials.json"></tutorial-list>
+    <tutorial-list></tutorial-list>
     <p><a href="index.html">← Back Home</a></p>
   </main>
 
@@ -29,7 +29,6 @@
     .then(html => {
       document.getElementById("header-container").innerHTML = html;
 
-      // Dark mode restore
       const label = document.getElementById("themeToggle");
       const checkbox = label.querySelector('input[type="checkbox"]');
       const body = document.body;
@@ -57,7 +56,6 @@
         body.classList.toggle("light-mode", checked);
       });
 
-      // 🔁 Page context-aware nav link swap
       const pageMap = {
         "all-tutorials.html": "tutorials",
         "workout-plan-strength.html": "strength",
