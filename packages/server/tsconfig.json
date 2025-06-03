@@ -1,15 +1,15 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "baseUrl": "./src",
+    "target": "ES2020",
+    "module": "CommonJS",
+    "rootDir": "./src",
     "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true,
-    "moduleResolution": "bundler",
-    "forceConsistentCasingInFileNames": true
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["node_modules"],
-  "lib": ["esnext"]
+  "exclude": ["node_modules"]
 }
