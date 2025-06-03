@@ -3,16 +3,17 @@ import path from "path";
 import { connect } from "./services/mongo";
 import Tutorials from "./services/tutorial-svc";
 import tutorials from "./routes/tutorials";
-import auth, { authenticateUser } from "./routes/auth";
+import { authenticateUser } from "./routes/auth";
+import auth from "./routes/auth";
 
 connect("fitness");
 
 const app = express();
 const port = process.env.PORT || 3000;
 const staticDir = path.resolve(__dirname, "../../proto/dist");
-
-app.use(express.json());
 app.use("/auth", auth);
+app.use(express.json());
+
 app.use("/api/tutorials", authenticateUser, tutorials);
 
 // Redirect root to login page
