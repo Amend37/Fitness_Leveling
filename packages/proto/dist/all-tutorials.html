@@ -3,83 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <title>All Tutorials</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles/reset.css" />
   <link rel="stylesheet" href="/styles/tokens.css" />
   <link rel="stylesheet" href="/styles/page.css" />
-  <script type="module" crossorigin src="/assets/allTutorials-CtbAmHsY.js"></script>
-  <link rel="modulepreload" crossorigin href="/assets/property-B9hbC3tx.js">
-  <link rel="modulepreload" crossorigin href="/assets/fit-tutorial-BbBrI9vi.js">
-  <link rel="modulepreload" crossorigin href="/assets/state-C5UoNPOO.js">
+  <script type="module" crossorigin src="/assets/allTutorials-F9SRsurV.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/property-WXAYD-zS.js">
+  <link rel="modulepreload" crossorigin href="/assets/state-DO0X74YQ.js">
+  <link rel="modulepreload" crossorigin href="/assets/fit-header-BQNaNTfB.js">
+  <link rel="modulepreload" crossorigin href="/assets/fit-tutorial-BT_UTIWf.js">
 </head>
 <body>
+  <mu-auth provides="fit:auth">
+    <fit-header></fit-header>
 
-  <div id="header-container"></div>
-
-  <main class="wrapper">
-    <h1>All Tutorials</h1>
-    <tutorial-list></tutorial-list>
-    <p><a href="index.html">← Back Home</a></p>
-  </main>
+    <main class="wrapper">
+      <h1>All Tutorials</h1>
+      <tutorial-list></tutorial-list>
+      <p><a href="index.html">← Back Home</a></p>
+    </main>
+  </mu-auth>
 
-
-  <script>
-  fetch("/components/header.html")
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById("header-container").innerHTML = html;
-
-      const label = document.getElementById("themeToggle");
-      const checkbox = label.querySelector('input[type="checkbox"]');
-      const body = document.body;
-      const saved = localStorage.getItem("lightmode");
-
-      if (saved === "true") {
-        checkbox.checked = true;
-        body.classList.add("light-mode");
-      }
-
-      label.onchange = (e) => {
-        e.stopPropagation();
-        const checked = e.target.checked;
-        localStorage.setItem("lightmode", checked);
-        label.dispatchEvent(
-          new CustomEvent("lightmode:toggle", {
-            bubbles: true,
-            detail: { checked }
-          })
-        );
-      };
-
-      body.addEventListener("lightmode:toggle", (e) => {
-        const { checked } = e.detail;
-        body.classList.toggle("light-mode", checked);
-      });
-
-      const pageMap = {
-        "all-tutorials.html": "tutorials",
-        "workout-plan-strength.html": "strength",
-        "workout-plan-cardio.html": "cardio",
-        "workout-plan-custom.html": "custom"
-      };
-
-      const filename = location.pathname.split("/").pop();
-      const current = pageMap[filename];
-
-      const nav = document.getElementById("main-nav");
-      const activeLink = nav?.querySelector(`[data-page="${current}"]`);
-
-      if (activeLink) {
-        const homeLink = document.createElement("a");
-        homeLink.href = "index.html";
-        homeLink.textContent = "Home";
-        homeLink.setAttribute("data-page", "home");
-        nav.replaceChild(homeLink, activeLink);
-      }
-    });
-</script>
-
 </body>
 </html>

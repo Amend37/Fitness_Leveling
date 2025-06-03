@@ -1,6 +1,6 @@
 import { html, css, LitElement } from "lit";
 import { state } from "lit/decorators.js";
-import { Auth, Observer, Events } from "@calpoly/mustang";
+import { Auth, Observer } from "@calpoly/mustang";
 
 export class FitHeader extends LitElement {
   @state() loggedIn = false;

@@ -1,5 +1,5 @@
 import { html, css, LitElement } from "lit";
-import { property, state } from "lit/decorators.js";
+import { state } from "lit/decorators.js";
 import { Auth, Observer } from "@calpoly/mustang"; // ADD THIS
 import "./fit-tutorial";
 
@@ -15,15 +15,16 @@ export class TutorialListElement extends LitElement {
   _authObserver = new Observer<Auth.Model>(this, "fit:auth"); // ADD THIS
   _user?: Auth.User;
 
-  get authorization() {
-    if (this._user && this._user.authenticated) {
-      return {
-        Authorization: `Bearer ${(this._user as Auth.AuthenticatedUser).token}`
-      };
-    } else {
-      return {};
-    }
+  get authorization(): HeadersInit {
+  if (this._user && this._user.authenticated) {
+    return {
+      Authorization: `Bearer ${(this._user as Auth.AuthenticatedUser).token}`,
+    };
+  } else {
+    return {}; 
   }
+}
+
 
   connectedCallback() {
     super.connectedCallback();

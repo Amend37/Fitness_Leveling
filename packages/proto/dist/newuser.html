@@ -2,32 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Register</title>
-
-  <script type="module" crossorigin src="/assets/newuser-D0fcBpEH.js"></script>
-  <link rel="modulepreload" crossorigin href="/assets/property-B9hbC3tx.js">
-  <link rel="modulepreload" crossorigin href="/assets/state-C5UoNPOO.js">
-  <link rel="modulepreload" crossorigin href="/assets/login-form-C23MQncg.js">
+  <title>Create Account</title>
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/styles/auth.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <script type="module" crossorigin src="/assets/newuser-CwxjpR88.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/property-WXAYD-zS.js">
+  <link rel="modulepreload" crossorigin href="/assets/state-DO0X74YQ.js">
+  <link rel="modulepreload" crossorigin href="/assets/login-form-jGnGUboO.js">
 </head>
-<body class="page">
+<body>
   <mu-auth>
-    <h2>Create New Account</h2>
-    <main class="card">
-      <login-form api="/auth/register" redirect="/index.html">
-        <label>
-          <span>Username:</span>
-          <input name="username" autocomplete="off" />
-        </label>
-        <label>
-          <span>Password:</span>
-          <input type="password" name="password" />
-        </label>
-        <span slot="button">
-          <button type="submit">Register</button>
-        </span>
-      </login-form>
-    </main>
-    <p>Already have an account? <a href="login.html">Sign in here</a>.</p>
+    <div class="card">
+      <img class="logo" src="/favicon.ico" alt="App Logo" />
+      
+      <h2>Create Account</h2>
+
+      <login-form api="/auth/login" redirect="/index.html">
+  <form>
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input id="username" name="username" autocomplete="off" />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input id="password" type="password" name="password" />
+    </div>
+
+    <span slot="button">
+      <button type="submit">Login</button>
+    </span>
+  </form>
+</login-form>
+
+
+      <p>Already have an account? <a href="login.html">Log in</a></p>
+    </div>
   </mu-auth>
 </body>
 </html>
