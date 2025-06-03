@@ -11,8 +11,10 @@ connect("fitness");
 const app = express();
 const port = process.env.PORT || 3000;
 const staticDir = path.resolve(__dirname, "../../proto/dist");
-app.use("/auth", auth);
+
 app.use(express.json());
+app.use("/auth", auth);
+
 
 app.use("/api/tutorials", authenticateUser, tutorials);
 
