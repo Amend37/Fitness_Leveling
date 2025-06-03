@@ -7,6 +7,9 @@ dotenv.config();
 const TOKEN_SECRET: string = process.env.TOKEN_SECRET || "NOT_A_SECRET";
 const router = express.Router();
 
+function create(username: string, password: string, userId?: string): Promise<Credential> {
+
+
 router.post("/register", (req: Request, res: Response) => {
   const { username, password } = req.body;
   if (typeof username !== "string" || typeof password !== "string")
@@ -43,7 +46,7 @@ export function authenticateUser(req: Request, res: Response, next: NextFunction
   const token = authHeader && authHeader.split(" ")[1];
   if (!token) res.status(401).end();
   else
-    jwt.verify(token, TOKEN_SECRET, err => {
+    jwt.verify(token, TOKEN_SECRET, (err: any) => {
       if (err) res.status(403).end();
       else next();
     });

@@ -17,21 +17,21 @@ app.use(express.json());
 app.use("/api/tutorials", authenticateUser, tutorials);
 
 // Redirect root to login page
-app.get("/", (req, res) => {
+app.get("/", (req: Request, res: Response) => {
   res.redirect("/login.html");
 });
 
 // Serve public HTML pages without auth
-app.get("/login.html", (req, res) => {
+app.get("/login.html", (req: Request, res: Response) => {
   res.sendFile("login.html", { root: staticDir });
 });
 
-app.get("/newuser.html", (req, res) => {
+app.get("/newuser.html", (req: Request, res: Response) => {
   res.sendFile("newuser.html", { root: staticDir });
 });
 
 // Protect all other HTML pages
-app.get("/:file.html", authenticateUser, (req, res) => {
+app.get("/:file.html", authenticateUser, (req: Request, res: Response) => {
   const file = req.path.substring(1);
   res.sendFile(file, { root: staticDir });
 });

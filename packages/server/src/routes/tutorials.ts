@@ -6,7 +6,7 @@ import Tutorials from "../services/tutorial-svc";
 const router = express.Router();
 
 // GET all tutorials
-router.get("/", (_req, res) => {
+router.get("/", (req: Request, res: Response) => {
   Tutorials.index()
     .then((list: Tutorial[]) => res.json(list))
     .catch((err) => res.status(500).send(err));
