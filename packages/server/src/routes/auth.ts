@@ -7,9 +7,6 @@ dotenv.config();
 const TOKEN_SECRET: string = process.env.TOKEN_SECRET || "NOT_A_SECRET";
 const router = express.Router();
 
-function create(username: string, password: string, userId?: string): Promise<Credential> {
-
-
 router.post("/register", (req: Request, res: Response) => {
   const { username, password } = req.body;
   if (typeof username !== "string" || typeof password !== "string")
@@ -27,7 +24,7 @@ router.post("/login", (req: Request, res: Response) => {
     res.status(400).send("Invalid input");
   else
     credentials.verify(username, password)
-      .then(user => generateAccessToken(user))
+      .then(user => generateAccessToken(user.username))
       .then(token => res.status(200).send({ token }))
       .catch(() => res.status(401).send("Unauthorized"));
 });
