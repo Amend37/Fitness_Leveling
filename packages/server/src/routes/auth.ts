@@ -2,10 +2,18 @@ import dotenv from "dotenv";
 import express, { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import credentials from "../services/credential-svc";
+export default router;
+
+
 
 dotenv.config();
 const TOKEN_SECRET: string = process.env.TOKEN_SECRET || "NOT_A_SECRET";
 const router = express.Router();
+
+router.post("/login", (req: Request, res: Response) => {
+  console.log("🔥 POST /auth/login hit");
+  res.status(200).send("Login success");
+});
 
 router.post("/register", (req: Request, res: Response) => {
   console.log("POST /auth/login hit");
