@@ -49,4 +49,6 @@ export function authenticateUser(req: Request, res: Response, next: NextFunction
     });
 }
 
+console.log("POST /auth/login hit");
+
 export default router;
