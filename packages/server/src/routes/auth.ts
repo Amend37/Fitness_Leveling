@@ -8,6 +8,7 @@ const TOKEN_SECRET: string = process.env.TOKEN_SECRET || "NOT_A_SECRET";
 const router = express.Router();
 
 router.post("/register", (req: Request, res: Response) => {
+  console.log("POST /auth/login hit");
   const { username, password } = req.body;
   if (typeof username !== "string" || typeof password !== "string")
     res.status(400).send("Invalid input");
@@ -19,6 +20,7 @@ router.post("/register", (req: Request, res: Response) => {
 });
 
 router.post("/login", (req: Request, res: Response) => {
+  console.log("POST /auth/login hit");
   const { username, password } = req.body;
   if (!username || !password)
     res.status(400).send("Invalid input");
@@ -49,6 +51,6 @@ export function authenticateUser(req: Request, res: Response, next: NextFunction
     });
 }
 
-console.log("POST /auth/login hit");
+
 
 export default router;
