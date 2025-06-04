@@ -40,6 +40,7 @@ import_dotenv.default.config();
 const TOKEN_SECRET = process.env.TOKEN_SECRET || "NOT_A_SECRET";
 const router = import_express.default.Router();
 router.post("/register", (req, res) => {
+  console.log("POST /auth/login hit");
   const { username, password } = req.body;
   if (typeof username !== "string" || typeof password !== "string")
     res.status(400).send("Invalid input");
@@ -47,11 +48,12 @@ router.post("/register", (req, res) => {
     import_credential_svc.default.create(username, password).then((creds) => generateAccessToken(creds.username)).then((token) => res.status(201).send({ token })).catch((err) => res.status(409).send({ error: err.message }));
 });
 router.post("/login", (req, res) => {
+  console.log("POST /auth/login hit");
   const { username, password } = req.body;
   if (!username || !password)
     res.status(400).send("Invalid input");
   else
-    import_credential_svc.default.verify(username, password).then((user) => generateAccessToken(user)).then((token) => res.status(200).send({ token })).catch(() => res.status(401).send("Unauthorized"));
+    import_credential_svc.default.verify(username, password).then((user) => generateAccessToken(user.username)).then((token) => res.status(200).send({ token })).catch(() => res.status(401).send("Unauthorized"));
 });
 function generateAccessToken(username) {
   return new Promise((resolve, reject) => {

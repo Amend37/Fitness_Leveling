@@ -33,10 +33,13 @@ __export(credential_svc_exports, {
 module.exports = __toCommonJS(credential_svc_exports);
 var import_bcryptjs = __toESM(require("bcryptjs"));
 var import_mongoose = require("mongoose");
-const credentialSchema = new import_mongoose.Schema({
-  username: { type: String, required: true, trim: true },
-  hashedPassword: { type: String, required: true }
-}, { collection: "user_credentials" });
+const credentialSchema = new import_mongoose.Schema(
+  {
+    username: { type: String, required: true, trim: true, unique: true },
+    hashedPassword: { type: String, required: true }
+  },
+  { collection: "user_credentials" }
+);
 const credentialModel = (0, import_mongoose.model)("Credential", credentialSchema);
 function create(username, password) {
   return credentialModel.find({ username }).then((found) => {
@@ -50,13 +53,12 @@ function create(username, password) {
 }
 function verify(username, password) {
   return credentialModel.find({ username }).then((found) => {
-    if (!found || found.length !== 1)
-      throw new Error("Invalid username or password");
+    if (!found || found.length !== 1) throw "Invalid username or password";
     return found[0];
   }).then(
     (credsOnFile) => import_bcryptjs.default.compare(password, credsOnFile.hashedPassword).then((result) => {
-      if (!result) throw new Error("Invalid username or password");
-      return credsOnFile.username;
+      if (!result) throw "Invalid username or password";
+      return credsOnFile;
     })
   );
 }

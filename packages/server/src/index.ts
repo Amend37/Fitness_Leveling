@@ -13,17 +13,18 @@ const port = process.env.PORT || 3000;
 const staticDir = path.resolve(__dirname, "../../proto/dist");
 
 app.use(express.json());
+
+// API routes
 app.use("/auth", auth);
-
-
 app.use("/api/tutorials", authenticateUser, tutorials);
 
-// Redirect root to login page
+// Public pages
 app.get("/", (req: Request, res: Response) => {
   res.redirect("/login.html");
 });
 
-// Serve public HTML pages without auth
+app.use(express.static(staticDir));
+
 app.get("/login.html", (req: Request, res: Response) => {
   res.sendFile("login.html", { root: staticDir });
 });
@@ -32,17 +33,14 @@ app.get("/newuser.html", (req: Request, res: Response) => {
   res.sendFile("newuser.html", { root: staticDir });
 });
 
-// Protect all other HTML pages
 app.get("/:file.html", authenticateUser, (req: Request, res: Response) => {
-  const file = req.path.substring(1);
-  res.sendFile(file, { root: staticDir });
+  res.sendFile(req.params.file + ".html", { root: staticDir });
 });
 
-// API route for client-side fetch (unrelated to auth)
-app.get("/tutorials", (req: Request, res: Response) => {
-  Tutorials.index().then((data) => {
-    res.set("Content-Type", "application/json").send(JSON.stringify(data));
-  });
+// Example API
+app.get("/tutorials", async (req: Request, res: Response) => {
+  const data = await Tutorials.index();
+  res.json(data);
 });
 
 app.listen(port, () => {

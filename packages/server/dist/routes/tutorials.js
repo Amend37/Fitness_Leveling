@@ -34,7 +34,7 @@ module.exports = __toCommonJS(tutorials_exports);
 var import_express = __toESM(require("express"));
 var import_tutorial_svc = __toESM(require("../services/tutorial-svc"));
 const router = import_express.default.Router();
-router.get("/", (_req, res) => {
+router.get("/", (req, res) => {
   import_tutorial_svc.default.index().then((list) => res.json(list)).catch((err) => res.status(500).send(err));
 });
 router.get("/:id", (req, res) => {
