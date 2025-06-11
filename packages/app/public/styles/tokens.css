@@ -1,0 +1,29 @@
+:root {
+  /* Color Tokens */
+  --color-background-page: #0a0707;
+  --color-background-header: #1f1f1f;
+  --color-text: #f1f1f1;
+  --color-text-header: #ffffff;
+  --color-accent: #ff6b6b;
+  --color-accent-alt: #4ecdc4;
+  --color-link: #ffa502;
+  --color-muted: #2c2c2c;
+
+  /* Typography Tokens */
+  --font-family-body: 'Inter', Arial, sans-serif;
+  --font-family-heading: 'Bebas Neue', Impact, sans-serif;
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+
+  /* Spacing Tokens */
+  --spacing-padding: 1rem;
+
+  body.light-mode {
+    --color-background-page: #f1f1f1;
+    --color-text: #0a0707;
+    --color-background-header: #979797;
+    --color-link: #0077ff;
+    --color-muted: #cccccc;
+  }
+  
+}

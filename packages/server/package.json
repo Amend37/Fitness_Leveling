@@ -9,6 +9,8 @@
     "start": "npm run build && npm run start:node",
     "start:node": "node dist/index.js",
     "start:proto": "cross-env STATIC=../proto/dist npm run start",
+    "start:app": "cross-env STATIC=../app/dist npm run start",
+    "start:api": "cross-env STATIC=./public npm run start:node",
     "check": "tsc --noEmit"
   },
   "keywords": [],
@@ -24,6 +26,7 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
-    "@types/jsonwebtoken": "^9.0.9"
+    "@types/jsonwebtoken": "^9.0.9",
+    "cross-env": "^7.0.3"
   }
 }

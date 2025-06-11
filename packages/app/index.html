@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fitness Level Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/reset.css" />
+  <link rel="stylesheet" href="/styles/tokens.css" />
+  <link rel="stylesheet" href="/styles/page.css" />
+</head>
+<body>
+  <mu-history provides="fit:history">
+    <mu-auth provides="fit:auth" redirect="/app/login">
+      <article class="page">
+        <fit-header></fit-header>
+        <mu-switch></mu-switch>
+      </article>
+    </mu-auth>
+  </mu-history>
+
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

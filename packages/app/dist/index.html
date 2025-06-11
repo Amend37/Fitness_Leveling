@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>My SPA</title>
+    <link rel="stylesheet" href="/styles/reset.css" />
+    <link rel="stylesheet" href="/styles/page.css" />
+    <link rel="stylesheet" href="/styles/tokens.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+    <script type="module" crossorigin src="/assets/index-6EyHlcpG.js"></script>
+  </head>
+  <body>
+    <mu-history provides="fitness:history">
+      <mu-auth provides="fitness:auth" redirect="/login.html">
+        <article class="page">
+          <blazing-header></blazing-header>
+          <mu-switch></mu-switch>
+        </article>
+      </mu-auth>
+    </mu-history>
+  </body>
+</html>

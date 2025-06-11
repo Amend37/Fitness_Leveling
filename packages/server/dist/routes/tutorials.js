@@ -1,57 +1,45 @@
 "use strict";
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
-  // If the importer is in node compatibility mode or this is not an ESM
-  // file that has been converted to a CommonJS file using a Babel-
-  // compatible transform (i.e. "__esModule" has not been set), then set
-  // "default" to the CommonJS "module.exports" for node compatibility.
-  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
-  mod
-));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var tutorials_exports = {};
-__export(tutorials_exports, {
-  default: () => tutorials_default
-});
-module.exports = __toCommonJS(tutorials_exports);
-var import_express = __toESM(require("express"));
-var import_tutorial_svc = __toESM(require("../services/tutorial-svc"));
-const router = import_express.default.Router();
+Object.defineProperty(exports, "__esModule", { value: true });
+// src/routes/tutorials.ts
+const express_1 = __importDefault(require("express"));
+const tutorial_svc_1 = __importDefault(require("../services/tutorial-svc"));
+const router = express_1.default.Router();
+// GET all tutorials
 router.get("/", (req, res) => {
-  import_tutorial_svc.default.index().then((list) => res.json(list)).catch((err) => res.status(500).send(err));
+    tutorial_svc_1.default.index()
+        .then((list) => res.json(list))
+        .catch((err) => res.status(500).send(err));
 });
+// GET tutorial by ID
 router.get("/:id", (req, res) => {
-  const { id } = req.params;
-  import_tutorial_svc.default.get(id).then((tut) => res.json(tut)).catch((err) => res.status(404).send(err));
+    const { id } = req.params;
+    tutorial_svc_1.default.get(id)
+        .then((tut) => res.json(tut))
+        .catch((err) => res.status(404).send(err));
 });
+// POST (create) a new tutorial
 router.post("/", (req, res) => {
-  const newTutorial = req.body;
-  import_tutorial_svc.default.create(newTutorial).then((tut) => res.status(201).json(tut)).catch((err) => res.status(500).send(err));
+    const newTutorial = req.body;
+    tutorial_svc_1.default.create(newTutorial)
+        .then((tut) => res.status(201).json(tut))
+        .catch((err) => res.status(500).send(err));
 });
+// PUT (update) a tutorial by ID
 router.put("/:id", (req, res) => {
-  const { id } = req.params;
-  const newTutorial = req.body;
-  import_tutorial_svc.default.update(id, newTutorial).then((tut) => res.json(tut)).catch((err) => res.status(404).send(err));
+    const { id } = req.params;
+    const newTutorial = req.body;
+    tutorial_svc_1.default.update(id, newTutorial)
+        .then((tut) => res.json(tut))
+        .catch((err) => res.status(404).send(err));
 });
+// DELETE tutorial by ID
 router.delete("/:id", (req, res) => {
-  const { id } = req.params;
-  import_tutorial_svc.default.remove(id).then(() => res.status(204).end()).catch((err) => res.status(404).send(err));
+    const { id } = req.params;
+    tutorial_svc_1.default.remove(id)
+        .then(() => res.status(204).end())
+        .catch((err) => res.status(404).send(err));
 });
-var tutorials_default = router;
+exports.default = router;

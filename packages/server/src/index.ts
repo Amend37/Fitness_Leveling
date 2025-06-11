@@ -5,18 +5,24 @@ import Tutorials from "./services/tutorial-svc";
 import tutorials from "./routes/tutorials";
 import { authenticateUser } from "./routes/auth";
 import auth from "./routes/auth";
+import fs from "fs/promises";
 
 connect("fitness");
 
 const app = express();
 const port = process.env.PORT || 3000;
-const staticDir = path.resolve(__dirname, "../../proto/dist");
+const staticDir = path.resolve(__dirname, "../../app/dist");
 
 app.use(express.json());
 
 // API routes
 app.use("/auth", auth);
 app.use("/api/tutorials", authenticateUser, tutorials);
+app.use("/app", async (req, res) => {
+  const indexHtml = path.resolve(staticDir, "index.html");
+  const html = await fs.readFile(indexHtml, "utf8");
+  res.send(html);
+});
 
 // Public pages
 app.get("/", (req: Request, res: Response) => {

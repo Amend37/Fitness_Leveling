@@ -16,9 +16,11 @@ function index(): Promise<Tutorial[]> {
   return TutorialModel.find();
 }
 
-function get(id: string): Promise<Tutorial> {
-  return TutorialModel.findById(new Types.ObjectId(id)).then((tut) => {
-    if (!tut) throw `${id} not found`;
+function get(id: any) {
+  return TutorialModel.findOne({ slug: id }).then((tut) => {
+    if (!tut) {
+      throw `${id} not found`;
+    }
     return tut;
   });
 }

@@ -1,57 +1,48 @@
 "use strict";
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
-  // If the importer is in node compatibility mode or this is not an ESM
-  // file that has been converted to a CommonJS file using a Babel-
-  // compatible transform (i.e. "__esModule" has not been set), then set
-  // "default" to the CommonJS "module.exports" for node compatibility.
-  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
-  mod
-));
-var import_express = __toESM(require("express"));
-var import_path = __toESM(require("path"));
-var import_mongo = require("./services/mongo");
-var import_tutorial_svc = __toESM(require("./services/tutorial-svc"));
-var import_tutorials = __toESM(require("./routes/tutorials"));
-var import_auth = require("./routes/auth");
-var import_auth2 = __toESM(require("./routes/auth"));
-(0, import_mongo.connect)("fitness");
-const app = (0, import_express.default)();
-const port = process.env.PORT || 3e3;
-const staticDir = import_path.default.resolve(__dirname, "../../proto/dist");
-app.use(import_express.default.json());
-app.use("/auth", import_auth2.default);
-app.use("/api/tutorials", import_auth.authenticateUser, import_tutorials.default);
-app.get("/", (req, res) => {
-  res.redirect("/login.html");
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const path_1 = __importDefault(require("path"));
+const mongo_1 = require("./services/mongo");
+const tutorial_svc_1 = __importDefault(require("./services/tutorial-svc"));
+const tutorials_1 = __importDefault(require("./routes/tutorials"));
+const auth_1 = require("./routes/auth");
+const auth_2 = __importDefault(require("./routes/auth"));
+const promises_1 = __importDefault(require("fs/promises"));
+(0, mongo_1.connect)("fitness");
+const app = (0, express_1.default)();
+const port = process.env.PORT || 3000;
+const staticDir = path_1.default.resolve(__dirname, "../../app/dist");
+app.use(express_1.default.json());
+// API routes
+app.use("/auth", auth_2.default);
+app.use("/api/tutorials", auth_1.authenticateUser, tutorials_1.default);
+app.use("/app", async (req, res) => {
+    const indexHtml = path_1.default.resolve(staticDir, "index.html");
+    const html = await promises_1.default.readFile(indexHtml, "utf8");
+    res.send(html);
 });
-app.use(import_express.default.static(staticDir));
+// Public pages
+app.get("/", (req, res) => {
+    res.redirect("/login.html");
+});
+app.use(express_1.default.static(staticDir));
 app.get("/login.html", (req, res) => {
-  res.sendFile("login.html", { root: staticDir });
+    res.sendFile("login.html", { root: staticDir });
 });
 app.get("/newuser.html", (req, res) => {
-  res.sendFile("newuser.html", { root: staticDir });
+    res.sendFile("newuser.html", { root: staticDir });
 });
-app.get("/:file.html", import_auth.authenticateUser, (req, res) => {
-  res.sendFile(req.params.file + ".html", { root: staticDir });
+app.get("/:file.html", auth_1.authenticateUser, (req, res) => {
+    res.sendFile(req.params.file + ".html", { root: staticDir });
 });
+// Example API
 app.get("/tutorials", async (req, res) => {
-  const data = await import_tutorial_svc.default.index();
-  res.json(data);
+    const data = await tutorial_svc_1.default.index();
+    res.json(data);
 });
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+    console.log(`Server running at http://localhost:${port}`);
 });
