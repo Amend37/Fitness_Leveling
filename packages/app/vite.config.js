@@ -1,5 +1,6 @@
 // packages/app/vite.config.js
 export default {
+  publicDir: "public",
   server: {
     proxy: {
       "/api": "http://localhost:3000",
