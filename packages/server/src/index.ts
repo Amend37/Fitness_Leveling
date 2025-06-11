@@ -26,18 +26,10 @@ app.use("/app", async (req, res) => {
 
 // Public pages
 app.get("/", (req: Request, res: Response) => {
-  res.redirect("/login.html");
+  res.redirect("/app/login");
 });
 
 app.use(express.static(staticDir));
-
-app.get("/login.html", (req: Request, res: Response) => {
-  res.sendFile("login.html", { root: staticDir });
-});
-
-app.get("/newuser.html", (req: Request, res: Response) => {
-  res.sendFile("newuser.html", { root: staticDir });
-});
 
 app.get("/:file.html", authenticateUser, (req: Request, res: Response) => {
   res.sendFile(req.params.file + ".html", { root: staticDir });
